@@ -2,14 +2,18 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="p-10 bg-black text-white text-center">
-      <h1 className="flex gap-3.5 justify-center">
+    <footer className="bg-black text-white text-center p-10">
+      <p className="flex gap-5 justify-center mb-1">
         <span>Conditions of Use & Sale</span>
         <span>Privacy Notice</span>
-        <span>Interest-Based Ads</span>
-      </h1>
-      <p className="text-sm mt-2">© 2003-2025, Qspider.in, Inc. or its affiliates</p>
-      
+        <span>
+          Contact us :{" "}
+          <a href="mailto: demo.user@gmail.com" className="underline">
+            demo.user@gmail.com
+          </a>
+        </span>
+      </p>
+      <p>&copy; 2003-2025, Qshop.com, Inc. or its affiliates</p>
     </footer>
   );
 };

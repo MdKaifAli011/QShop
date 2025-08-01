@@ -1,66 +1,102 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import { IoCartOutline, IoClose } from "react-icons/io5";
 import Divider from "@mui/material/Divider";
+import { IoCart, IoClose } from "react-icons/io5";
+import { AxiosInstance } from "../routes/axiosInstance";
+import CartProduct from "./CartProduct";
 
 export default function CartDrawer() {
   const [open, setOpen] = React.useState(false);
+  const [cartItems, setCartItems] = React.useState([]);
+
+  async function getCartItems() {
+    let res = await AxiosInstance.get("/shop/cart/get");
+    setCartItems(res.data.data.items);
+  }
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+    getCartItems();
   };
 
-  const sampleProducts = [
-    {
-      image: "https://example.com/products/shirt.jpg",
-      title: "cotton casual shirt",
-      description:
-        "comfortable and breathable cotton casual shirt for daily wear",
-      category: "clothing",
-      brand: "united colors",
-      price: 999,
-      salePrice: 799,
-      totalStock: 50,
-      averageReview: 4.2,
-    },
-  ];
+  const onClearCart = async () => {
+    await AxiosInstance.delete("/shop/cart/clear");
+    getCartItems();
+  };
+
+  const onDecrease = async (product) => {
+    await AxiosInstance.patch("/shop/cart/update", {
+      productId: product.productId,
+    });
+    getCartItems();
+  };
+
+  const onIncrease = async (product) => {
+    await AxiosInstance.post("/shop/cart/add", {
+      productId: product.productId,
+    });
+    getCartItems();
+  };
+
+  const onRemove = async (product) => {
+    await AxiosInstance.delete(`/shop/cart/delete/${product.productId}`);
+    getCartItems();
+  };
+
+  let totalPrice = cartItems.reduce((sum, item) => {
+    return sum + item.salePrice * item.quantity;
+  }, 0);
 
   const DrawerList = (
-    <Box sx={{ width: 450 }} role="presentation" >
-      <div className="p-5 flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Cart</h1>
-        <IoClose size={30} onClick={toggleDrawer(false)}/>
+    <Box sx={{ width: 400 }} role="presentation" className="relative">
+      <div className="p-4 flex justify-between items-center">
+        <h1 className="text-3xl font-semibold">My Cart</h1>
+
+        <IoClose size={30} onClick={toggleDrawer(false)} />
       </div>
 
       <Divider />
 
-      <div className="p-5">
-        {sampleProducts.map((ele) => {
-          return (
-            <div
-              key={ele.id}
-              className="p-2 flex gap-1 rounded shadow-md border border-gray-200"
-            >
-              <img
-                src="https://media.istockphoto.com/id/137996281/photo/blue-t-shirt.jpg?s=612x612&w=0&k=20&c=7D3z5wCRV3Duvyc8lLFJVAFqkWMg4xHcDieuqspq8zk="
-                alt=""
-                className="border h-20 w-20 object-center object-cover"
+      <h1 className="text-end p-2 text-xl font-semibold text-red-400">
+        <span
+          className=" hover:text-red-700 cursor-pointer"
+          onClick={onClearCart}
+        >
+          Clear cart
+        </span>
+      </h1>
+
+      <div className="pb-20">
+        {cartItems.length === 0 ? (
+          <h1 className="text-center font-semibold">Cart is empty</h1>
+        ) : (
+          cartItems.map((item, idx) => {
+            return (
+              <CartProduct
+                product={item}
+                key={idx}
+                onDecrease={onDecrease}
+                onIncrease={onIncrease}
+                onRemove={onRemove}
               />
-              <div className="border w-full ps-1 text-black">
-                <h1 className="capitalize font-semibold">{ele.title}</h1>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
+
+      <Divider />
+
+      <h1 className="text-center  absolute py-5 bg-white w-full  bottom-0  right-0 text-2xl pe-3">
+        Total Price : Rs. {Math.round(totalPrice)}
+      </h1>
     </Box>
   );
 
   return (
     <div>
-      <button onClick={toggleDrawer(true)} className="mt-1">
-        <IoCartOutline />
+      <button onClick={toggleDrawer(true)}>
+        <IoCart size={30} />
       </button>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         {DrawerList}

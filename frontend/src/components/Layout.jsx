@@ -1,18 +1,17 @@
-import React from 'react'
-import Navbar from "./Navbar"
-import { Outlet } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify';
-import Footer from './Footer';
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import { ToastContainer } from "react-toastify";
+import Footer from "./Footer";
 
 const Layout = () => {
   return (
-    <div>
-      <ToastContainer position="bottom-left"/>
-      <Navbar/>
-      <Outlet/>
+    <div className="bg-gray-50">
+      <ToastContainer position="bottom-right"/>
+      <Navbar />
+      <Outlet />
       <Footer/>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import RegisterPage from "../components/RegisterPage";
 import LoginPage from "../components/LoginPage";
-import Dashboard from "../components/Dashboard";
 import Home from "../components/Home";
 import Products from "../components/Products";
+import UserPrivate from "./UserPrivate";
 
 export let myRoutes = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ export let myRoutes = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <RegisterPage />,
       },
       {
@@ -20,17 +20,21 @@ export let myRoutes = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/home",
-        element: <Home />,
+        element: (
+          <UserPrivate>
+            <Home />
+          </UserPrivate>
+        ),
       },
       {
-        path:"/products",
-        element:<Products/>
-      }
+        path: "/products",
+        element: (
+          <UserPrivate>
+            <Products />
+          </UserPrivate>
+        ),
+      },
     ],
   },
 ]);

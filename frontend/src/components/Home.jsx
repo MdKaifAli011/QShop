@@ -1,61 +1,66 @@
-import React from "react";
 import { IoShirtOutline } from "react-icons/io5";
-import { PiPantsLight } from "react-icons/pi";
-import { CgBoy } from "react-icons/cg";
-import { FiWatch } from "react-icons/fi";
-import { GiRunningShoe } from "react-icons/gi";
-import { SiPuma } from "react-icons/si";
-import { SiAdidas } from "react-icons/si";
-import { SiNike } from "react-icons/si";
-import { SiZara } from "react-icons/si";
-import { SiHandm } from "react-icons/si";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-
+import { useContext } from "react";
+import { AllProductsContext } from "../productContext/ProductsContext";
+import ProductCard from "./ProductCard";
 const Home = () => {
+
+  let { allProducts } = useContext(AllProductsContext);
+
   const categories = [
     {
-      icon: <IoShirtOutline />,
+      id: "men",
       title: "Men",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <PiPantsLight />,
+      id: "women",
       title: "Women",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <CgBoy />,
+      id: "kids",
       title: "Kids",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <FiWatch />,
+      id: "footware",
+      title: "Footware",
+      icon: <IoShirtOutline />,
+    },
+    {
+      id: "accessories",
       title: "Accessories",
-    },
-    {
-      icon: <GiRunningShoe />,
-      title: "Footwear",
+      icon: <IoShirtOutline />,
     },
   ];
 
   const brands = [
     {
-      icon: <SiPuma />,
-      title: "Puma",
+      id: "nike",
+      brandName: "Nike",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <SiAdidas />,
-      title: "Adidas",
+      id: "h&m",
+      brandName: "H&M",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <SiNike />,
-      title: "Nike",
+      id: "adidas",
+      brandName: "Adidas",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <SiHandm />,
-      title: "H&M",
+      id: "zara",
+      brandName: "Zara",
+      icon: <IoShirtOutline />,
     },
     {
-      icon: <SiZara />,
-      title: "Zara",
+      id: "puma",
+      brandName: "Puma",
+      icon: <IoShirtOutline />,
     },
   ];
 
@@ -179,177 +184,134 @@ const Home = () => {
   ];
 
   const items = [
-    <div className="item h-[70vh] relative" data-value="1">
+    <div className="item h-[70vh]" data-value="1">
       <img
-        src="/assets/image1.png"
-        alt="landing image"
+        src="/assets/image.png"
+        alt=""
         className="h-full w-full object-center object-cover"
       />
-
-      <div className="absolute top-30 left-30">
-        <h1 className="text-5xl font-light mb-2">
-          We Pick Every Item with Care
-        </h1>
-        <h1 className="text-4xl font-bold mb-10">You Must Try</h1>
-        <button className="bg-black text-white p-3">View Products</button>
-      </div>
     </div>,
-
-
-
-    <div className="item h-[70vh] relative" data-value="2">
+    <div className="item h-[70vh]" data-value="2">
       <img
-        src="/assets/image1.png"
-        alt="landing image"
+        src="/assets/image2.jpg"
+        alt=""
         className="h-full w-full object-center object-cover"
       />
-
-      <div className="absolute top-30 left-30">
-        <h1 className="text-5xl font-light mb-2">
-          We Pick Every Item with Care
-        </h1>
-        <h1 className="text-4xl font-bold mb-10">You Must Try</h1>
-        <button className="bg-black text-white p-3">View Products</button>
-      </div>
     </div>,
-    <div className="item h-[70vh] relative" data-value="3">
+    <div className="item h-[70vh]" data-value="3">
       <img
-        src="/assets/image1.png"
-        alt="landing image"
+        src="/assets/image3.jpg"
+        alt=""
         className="h-full w-full object-center object-cover"
       />
-
-      <div className="absolute top-30 left-30">
-        <h1 className="text-5xl font-light mb-2">
-          We Pick Every Item with Care
-        </h1>
-        <h1 className="text-4xl font-bold mb-10">You Must Try</h1>
-        <button className="bg-black text-white p-3">View Products</button>
-      </div>
     </div>,
-    <div className="item h-[70vh] relative" data-value="4">
+    <div className="item h-[70vh]" data-value="4">
       <img
-        src="/assets/image1.png"
-        alt="landing image"
+        src="/assets/image4.avif"
+        alt=""
         className="h-full w-full object-center object-cover"
       />
-
-      <div className="absolute top-30 left-30">
-        <h1 className="text-5xl font-light mb-2">
-          We Pick Every Item with Care
-        </h1>
-        <h1 className="text-4xl font-bold mb-10">You Must Try</h1>
-        <button className="bg-black text-white p-3">View Products</button>
-      </div>
     </div>,
-    <div className="item h-[70vh] relative" data-value="5">
+    <div className="item h-[70vh]" data-value="5">
       <img
-        src="/assets/image1.png"
-        alt="landing image"
+        src="/assets/image5.jpeg"
+        alt=""
         className="h-full w-full object-center object-cover"
       />
-
-      <div className="absolute top-30 left-30">
-        <h1 className="text-5xl font-light mb-2">
-          We Pick Every Item with Care
-        </h1>
-        <h1 className="text-4xl font-bold mb-10">You Must Try</h1>
-        <button className="bg-black text-white p-3">View Products</button>
-      </div>
     </div>,
   ];
 
   return (
-    <section className="mt-[70px]  bg-gray-50">
-      <AliceCarousel
-        autoPlay
-        autoPlayStrategy="none"
-        autoPlayInterval={2000}
-        animationDuration={1000}
-        animationType="slide"
-        infinite
-        touchTracking={false}
-        disableDotsControls
-        disableButtonsControls
-        items={items}
-      />
+    <div className="mt-[70px] w-full bg-gray-50">
+      {/* <header className="h-[70vh] w-full relative">
+        <img
+          src="/assets/image.png"
+          alt=""
+          className="h-full w-full object-center object-cover"
+        />
 
-      <header className="py-20">
-        <h1 className="text-4xl font-extrabold text-center">
-          Shop by Category
-        </h1>
+        <div className="absolute top-[15vh] left-20">
+          <h1 className="text-5xl font-light mb-4">
+            Lorem ipsum dolor sit amet.
+          </h1>
+          <h2 className="text-4xl font-bold mb-10">Lorem ipsum dolor sit.</h2>
+          <button className="bg-black text-white px-4 py-2 rounded">
+            View Products
+          </button>
+        </div>
+      </header> */}
+
+      <header className="h-[70vh] w-full">
+        <AliceCarousel
+          autoPlay
+          autoPlayStrategy="none"
+          autoPlayInterval={2000}
+          animationDuration={1000}
+          animationType="slide"
+          infinite
+          touchTracking={false}
+          disableDotsControls
+          disableButtonsControls
+          items={items}
+        />
       </header>
 
-      <article className="flex items-center justify-evenly">
-        {categories.map((category, idx) => {
-          return (
-            <div key={idx} className="px-20 py-10 rounded bg-white shadow-lg">
-              <h1 className="text-6xl flex justify-center">{category.icon}</h1>
-              <h3 className="text-center mt-2 font-semibold">
-                {category.title}
-              </h3>
-            </div>
-          );
-        })}
-      </article>
+      <section className="py-10">
+        <header className="p-10">
+          <h1 className="font-extrabold text-center text-3xl">
+            Shop by Category
+          </h1>
+        </header>
 
-      <header className="py-20">
-        <h1 className="text-4xl font-extrabold text-center">Shop by Brands</h1>
-      </header>
-
-      <article className="flex items-center justify-evenly">
-        {brands.map((brand, idx) => {
-          return (
-            <div key={idx} className="px-20 py-10 rounded bg-white shadow-lg">
-              <h1 className="text-6xl flex justify-center">{brand.icon}</h1>
-              <h3 className="text-center mt-2 font-semibold">{brand.title}</h3>
-            </div>
-          );
-        })}
-      </article>
-
-      <header className="py-20">
-        <h1 className="text-4xl font-extrabold text-center">
-          Featured Products
-        </h1>
-      </header>
-
-      <article className="grid grid-cols-4">
-        {sampleProducts.map((product, idx) => {
-          return (
-            <div key={idx} className="p-3">
-              <div className="rounded-lg overflow-hidden shadow-md bg-white">
-                <img
-                  src="https://rukminim3.flixcart.com/image/850/1000/kvtuxe80/t-shirt/i/k/4/m-dm2254-100nike-nike-original-imag8nbgt2ga6uu8.jpeg?q=90&crop=false"
-                  alt=""
-                  className=" h-[325px] w-full object-top object-cover"
-                />
-
-                <div className="p-3">
-                  <h1 className="font-bold capitalize text-2xl">
-                    {product.title}
-                  </h1>
-
-                  <h2 className="flex justify-between uppercase font-semibold text-gray-600 text-sm">
-                    <span>{product.category}</span>
-                    <span>{product.brand}</span>
-                  </h2>
-
-                  <p className="flex justify-between font-bold">
-                    <del>Rs.{product.price}</del>
-                    <span>Rs.{product.salePrice}</span>
-                  </p>
-
-                  <button className="bg-black text-white w-full py-2 rounded mt-4">
-                    Add to cart
-                  </button>
-                </div>
+        <article className="flex items-center justify-evenly">
+          {categories.map((category) => {
+            return (
+              <div
+                key={category.id}
+                className="py-3 px-12 rounded-lg bg-white shadow-xl border border-gray-200"
+              >
+                <figure className="text-6xl p-3">{category.icon}</figure>
+                <h3 className="font-bold text-center pt-2">{category.title}</h3>
               </div>
-            </div>
-          );
-        })}
-      </article>
-    </section>
+            );
+          })}
+        </article>
+
+        <header className="pt-30 pb-10">
+          <h1 className="font-extrabold text-center text-3xl">
+            Shop by Brands
+          </h1>
+        </header>
+
+        <article className="flex items-center justify-evenly">
+          {brands.map((brand) => {
+            return (
+              <div
+                key={brand.id}
+                className="py-3 px-12 rounded-lg bg-white shadow-xl border border-gray-200"
+              >
+                <figure className="text-6xl p-3">{brand.icon}</figure>
+                <h3 className="font-bold text-center pt-2">
+                  {brand.brandName}
+                </h3>
+              </div>
+            );
+          })}
+        </article>
+
+        <header className="pt-30 pb-10">
+          <h1 className="font-extrabold text-center text-3xl">
+            Featured Products
+          </h1>
+        </header>
+
+        <article className="grid grid-cols-4 justify-items-center">
+          {allProducts.map((product, idx) => {
+            return <ProductCard key={idx} product={product}/>;
+          })}
+        </article>
+      </section>
+    </div>
   );
 };
 
